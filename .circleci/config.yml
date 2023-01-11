@@ -18,10 +18,24 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
       # Use mvn clean and package as the standard maven build phase
       - run:
           name: Build
           command: mvn -B -DskipTests clean package
+
+      - run:
+          name: Offline
+          command: mvn dependency:go-offline
+
+      - save-cache:
+          paths:
+            - ~/.m2
+            key: v1-dependencies-{{ checksum "pom.xml" }}
       # Then run your tests!
       - run:
           name: Test
@@ -33,4 +47,6 @@ workflows:
   sample: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - build-and-test
+      - build
+      - offline
+      - test
