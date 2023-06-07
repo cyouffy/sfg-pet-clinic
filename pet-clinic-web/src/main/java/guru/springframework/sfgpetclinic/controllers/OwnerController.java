@@ -52,21 +52,19 @@ public class OwnerController {
         }
 
         // find owners by last name
-        List<Owner> results = ownerService.findOwnerByLastNameLike("%" + owner.getLastName() + "%");
+        List<Owner> results = ownerService.findOwnerByLastNameLike(owner.getLastName());
         if (results.isEmpty()) {
             // no owners found
             result.rejectValue("lastName", "notFound", "not found");
             return "owners/findOwners";
-        }
-
-        if (results.size() == 1) {
+        } else if (results.size() == 1) {
             // 1 owner found
             owner = results.get(0);
             return "redirect:/owners/" + owner.getId();
+        } else {
+            // multiple owners found
+            model.addAttribute("selections", results);
+            return "/owners/ownersList";
         }
-
-        // multiple owners found
-        model.addAttribute("selections", result);
-        return "/owners/ownersList";
     }
 }
