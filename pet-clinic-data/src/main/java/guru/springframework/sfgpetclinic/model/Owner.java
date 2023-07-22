@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,12 +30,15 @@ public class Owner extends Person{
     }
 
     @Column(name = "address")
+    @NotEmpty
     private String address;
 
     @Column(name = "city")
+    @NotEmpty
     private String city;
 
     @Column(name = "telephone")
+    @NotEmpty
     private String telephone;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")

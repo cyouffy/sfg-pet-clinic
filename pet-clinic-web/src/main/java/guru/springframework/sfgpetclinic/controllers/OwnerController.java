@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/owners")
 @Controller
 public class OwnerController {
-    private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/CreateOrUpdateOwnerForm";
+    static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/CreateOrUpdateOwnerForm";
 
     private final OwnerService ownerService;
 
