@@ -1,6 +1,5 @@
 package guru.springframework.sfgpetclinic.controllers;
 
-import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.model.Pet;
 import guru.springframework.sfgpetclinic.model.Visit;
 import guru.springframework.sfgpetclinic.services.PetService;
@@ -17,6 +16,8 @@ import java.time.LocalDate;
 
 @Controller
 public class VisitController {
+    static final String PETS_CREATE_OR_UPDATE_VISIT_FORM = "pets/createOrUpdateVisitForm";
+
     private final VisitService visitService;
     private final PetService petService;
 
@@ -58,7 +59,7 @@ public class VisitController {
     // called
     @GetMapping("/owners/{ownerId}/pets/{petId}/visits/new")
     public String initNewVisitForm() {
-        return "pets/createOrUpdateVisitForm";
+        return PETS_CREATE_OR_UPDATE_VISIT_FORM;
     }
 
     // Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is
@@ -66,7 +67,7 @@ public class VisitController {
     @PostMapping("/owners/{ownerId}/pets/{petId}/visits/new")
     public String processNewVisitForm(@Validated Visit visit, BindingResult result) {
         if (result.hasErrors()) {
-            return "pets/createOrUpdateVisitForm";
+            return PETS_CREATE_OR_UPDATE_VISIT_FORM;
         }
         visitService.save(visit);
         return "redirect:/owners/{ownerId}";
