@@ -11,10 +11,6 @@ import static guru.springframework.sfgpetclinic.controllers.CrashController.URL_
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-/**
- * @author Gaetan Bloch
- * Created on 30/03/2020
- */
 class CrashControllerTest {
     private MockMvc mockMvc;
 
