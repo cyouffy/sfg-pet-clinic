@@ -38,6 +38,7 @@ jobs:
           command: |
             echo "maven.repo.blocking.enabled=false" > .maven/settings.xml
 
+      - run: docker login -u $CIRCLE_CI_USERNAME -p $CIRCLE_CI_PASSWORD
       - run: mvn dependency:go-offline
 
       - save_cache:
