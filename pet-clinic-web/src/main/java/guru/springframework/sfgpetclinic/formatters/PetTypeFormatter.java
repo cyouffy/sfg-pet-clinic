@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.Locale;
 
 @Controller
-public class PetTypeFormatter implements Formatter<PetType> {
+public final class PetTypeFormatter implements Formatter<PetType> {
     private final PetTypeService petTypeService;
 
     public PetTypeFormatter(PetTypeService petTypeService) {
