@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/maven:3.8.4
+      - image: circleci/openjdk:11-browsers-legacy
 
     # Specify service dependencies here if necessary
     # CircleCI maintains a library of pre-built images
@@ -32,13 +32,6 @@ jobs:
 
       - run: mvn install -DskipTests
 
-      # Disable repository blocking
-      - run:
-          name: Disable repository blocking
-          command: |
-            echo "maven.repo.blocking.enabled=false" > .maven/settings.xml
-
-      - run: docker login -u $CIRCLE_CI_USERNAME -p $CIRCLE_CI_PASSWORD
       - run: mvn dependency:go-offline
 
       - save_cache:
